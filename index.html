@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praxis-Leitfaden: Umgang mit negativen Emotionen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e8eff6; /* NEU: Heller blauer Hintergrund */
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1); /* Sanfterer Schatten */
+            overflow: hidden;
+        }
+
+        header {
+            background: #194a6b; /* NEU: Dunkelblau */
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            margin-top: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: white;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            overflow-x: auto;
+            background: #ffffff; /* NEU: Weißer Hintergrund */
+            padding: 10px;
+            border-bottom: 2px solid #e8eff6; /* NEU: Heller blauer Rand */
+        }
+
+        nav button {
+            /* flex: 1;  <- Entfernt für natürliche Breite */
+            min-width: 150px;
+            padding: 10px 15px; /* Padding angepasst */
+            margin: 0 5px;
+            background: white;
+            border: 2px solid #a4c2d9; /* NEU: Mittlerer blauer Rand */
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            
+            /* --- NEUE REGELN FÜR ZENTRIERUNG & UMBRUCH --- */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 50px; /* Stellt sicher, dass alle Buttons gleich hoch sind */
+            white-space: normal; /* Erlaubt Textumbruch */
+        }
+
+        nav button:hover {
+            background: #e8eff6; /* NEU: Heller blauer Hover */
+            transform: translateY(-2px);
+        }
+
+        nav button.active {
+            background: #194a6b; /* NEU: Dunkelblau */
+            color: white;
+            border-color: #194a6b; /* NEU: Dunkelblau */
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .chapter {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .chapter.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #194a6b; /* NEU: Dunkelblau */
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 1.2em;
+        }
+
+        .step-card {
+            background: #f8f9fa;
+            border-left: 4px solid #194a6b; /* NEU: Dunkelblau */
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            box-shadow: 0 5px 15px rgba(25, 74, 107, 0.2); /* NEU: Blauer Schatten */
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #194a6b; /* NEU: Dunkelblau */
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .step-content {
+            color: #555;
+            line-height: 1.6;
+            margin-left: 40px;
+        }
+
+        .step-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .step-content li {
+            margin: 8px 0;
+        }
+
+        .example-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .example-box strong {
+            color: #856404;
+        }
+
+        .tip-box {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .tip-box strong {
+            color: #0c5460;
+        }
+
+        .habit-card {
+            background: #a4c2d9; /* NEU: Mittleres Blau */
+            color: #194a6b; /* NEU: Dunkelblauer Text */
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+
+        .habit-card h3 {
+            margin-bottom: 10px;
+            color: #194a6b; /* NEU: Sicherstellen, dass H3 dunkelblau ist */
+        }
+
+        .emergency-box {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .emergency-box h3 {
+            color: #721c24;
+            margin-bottom: 10px;
+        }
+
+        .emergency-quote {
+            font-size: 1.3em;
+            font-style: italic;
+            color: #721c24;
+            font-weight: bold;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            background: #194a6b; /* NEU: Dunkelblau */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25, 74, 107, 0.4); /* NEU: Blauer Schatten */
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            nav {
+                flex-wrap: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 Praxis-Leitfaden: Umgang mit negativen Emotionen</h1>
+            <p>Evidenzbasierte Strategien für den Arbeitsalltag</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </header>
+
+        <nav id="chapterNav">
+            <button onclick="showChapter(0)">Einführung</button>
+            <button onclick="showChapter(1)">Email-Situation</button>
+            <button onclick="showChapter(2)">Kritik im Meeting</button>
+            <button onclick="showChapter(3)">Frustration</button>
+            <button onclick="showChapter(4)">Teamstimmung</button>
+            <button onclick="showChapter(5)">Tägliche Gewohnheiten</button>
+            <button onclick="showChapter(6)">Zusammenfassung</button>
+        </nav>
+
+        <div class="content">
+            <div class="chapter active" data-chapter="0">
+                <h2><span class="icon">🎯</span> Willkommen zum Praxis-Leitfaden</h2>
+                
+                <div class="tip-box">
+                    <strong>💡 Wichtigste Regel:</strong><br>
+                    Emotionen sind Informationen, keine Schwäche. Sie zeigen dir, was dir wichtig ist, wo Grenzen überschritten werden und was du brauchst.
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">Was Sie in diesem Leitfaden lernen:</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>Konkrete Handlungsschritte für typische Emotionssituationen</li>
+                            <li>Wissenschaftlich bewährte Techniken zur Emotionsregulation</li>
+                            <li>Sofort umsetzbare Mikro-Gewohnheiten für den Alltag</li>
+                            <li>Praktische Kommunikationsstrategien</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">Die Kunst der bewussten Reaktion</div>
+                    <div class="step-content">
+                        Es geht nicht darum, Emotionen zu unterdrücken, sondern <span class="highlight">bewusst zu entscheiden</span>, wie Sie auf sie reagieren. Dieser Leitfaden gibt Ihnen dafür die Werkzeuge an die Hand.
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter" data-chapter="1">
+                <h2><span class="icon">📧</span> Situation 1: Unangemessene Email erhalten</h2>
+                
+                <div class="emergency-box">
+                    <h3>⚠️ STOPP - Nicht sofort antworten!</h3>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Pause-Regel (90 Sekunden)</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>Tief durchatmen (3x langsam ein- und ausatmen)</li>
+                            <li>Emotionaler Impuls klingt nach ~90 Sekunden merklich ab</li>
+                            <li>Bei starker Reaktion: Email schließen, 10 Minuten warten</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Trennen: Person vs. Inhalt</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>Frage dich: "Was will diese Person sachlich erreichen?"</li>
+                            <li>Markiere mit Textmarker nur die inhaltlichen Punkte</li>
+                            <li>Ignoriere Tonfall und Formulierung beim ersten Durchlesen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Perspektivenwechsel</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>"Könnte die Person unter Druck stehen?"</li>
+                            <li>"Hat sie vielleicht Informationen, die ich nicht habe?"</li>
+                            <li>"Wäre ein Missverständnis möglich?"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Antworten: Sachlich spiegeln</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>Beginne neutral: "Danke für deine Nachricht"</li>
+                            <li>Gehe nur auf die Fakten ein: "Du sprichst folgende Punkte an: 1., 2., 3."</li>
+                            <li>Biete Lösungen an, nicht Rechtfertigungen</li>
+                            <li><strong>Kein "Aber"</strong> - verwende stattdessen "Und"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <strong>✅ Beispiel-Formulierung:</strong><br>
+                    "Danke für dein Feedback zum Projekt. Ich verstehe, dass dir X wichtig ist. Hier mein Stand dazu: [...]. Für Punkt Y schlage ich vor: [...]. Können wir das kurz telefonisch besprechen?"
+                </div>
+            </div>
+
+            <div class="chapter" data-chapter="2">
+                <h2><span class="icon">💼</span> Situation 2: Kritik im Meeting</h2>
+                
+                <h3 style="color: #194a6b; margin: 30px 0 20px 0;">Im Moment selbst:</h3> <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Körperhaltung bewahren</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>Aufrecht sitzen bleiben</li>
+                            <li>Nicht verschränken oder zurücklehnen</li>
+                            <li>Augenkontakt halten (signalisiert: Ich höre zu, bin nicht defensiv)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Aktiv zuhören statt verteidigen</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>Lass die Person ausreden</li>
+                            <li>Sage: "Verstehe ich richtig, dass...?" (Wiederholen in eigenen Worten)</li>
+                            <li><strong>Nicht</strong> sofort erklären oder rechtfertigen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Zeit gewinnen</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>"Guter Punkt, lass mich kurz nachdenken"</li>
+                            <li>"Dazu möchte ich detailliert antworten - können wir das nach dem Meeting klären?"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="color: #194a6b; margin: 30px 0 20px 0;">Danach:</h3> <div class="step-card">
+                    <div class="step-content">
+                        <ul>
+                            <li>5 Minuten Spaziergang oder Wasser holen</li>
+                            <li>Notiere sachlich: Was war die Kritik? Was davon ist berechtigt?</li>
+                            <li>Entscheide dann, ob/wie du reagierst</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter" data-chapter="3">
+                <h2><span class="icon">😤</span> Situation 3: Überwältigende Frustration/Ärger</h2>
+                
+                <h3 style="color: #194a6b; margin: 30px 0 20px 0;">Sofortmaßnahme (diskret am Arbeitsplatz):</h3> <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-title">5-4-3-2-1 Technik (Grounding)</div>
+                    <div class="step-content">
+                        Benenne:
+                        <ul>
+                            <li>5 Dinge, die du <strong>siehst</strong></li>
+                            <li>4 Dinge, die du <strong>fühlst</strong> (z.B. Füße auf Boden, Rücken am Stuhl)</li>
+                            <li>3 Dinge, die du <strong>hörst</strong></li>
+                            <li>2 Dinge, die du <strong>riechst</strong></li>
+                            <li>1 Ding, das du <strong>schmeckst</strong></li>
+                        </ul>
+                        <div class="tip-box" style="margin-top: 15px;">
+                            <strong>💡 Effekt:</strong> Holt dich in 1-2 Minuten aus der Emotion zurück
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Aufschreiben, dann löschen</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>Schreibe ungefiltert auf, was dich ärgert</li>
+                            <li>Lösche es dann oder zerknülle das Papier</li>
+                            <li>Allein das "Rauslassen" reduziert die Intensität deutlich</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Bewegung</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>Kurz Treppen steigen oder Runde ums Gebäude</li>
+                            <li>Wandelt Stress-Hormone körperlich ab</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter" data-chapter="4">
+                <h2><span class="icon">👥</span> Situation 4: Angespannte Stimmung im Team spüren</h2>
+                
+                <h3 style="color: #194a6b; margin: 30px 0 20px 0;">Was du tun kannst:</h3> <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Explizit ansprechen (nicht ignorieren)</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>"Ich merke, die Stimmung ist angespannt. Geht's euch gut?"</li>
+                            <li>"Sollen wir 5 Minuten Pause machen?"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Eigenes Befinden teilen (Vorbild)</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>"Ich bin gerade ziemlich gestresst wegen X"</li>
+                            <li>Macht es anderen leichter, auch offen zu sein</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Kleine Gesten</div>
+                    <div class="step-content">
+                        <ul>
+                            <li>Kaffee für gestresste Kolleg:in mitbringen</li>
+                            <li>Kurze unterstützende Nachricht: "Viel Erfolg bei [X] heute!"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter" data-chapter="5">
+                <h2><span class="icon">📅</span> Täglich umsetzbar: Die 3 Mikro-Gewohnheiten</h2>
+                
+                <div class="habit-card">
+                    <h3>1️⃣ Morgendlicher Emotions-Check (30 Sekunden)</h3>
+                    <p>Frage dich: "Wie fühle ich mich gerade? Womit komme ich heute rein?"</p>
+                    <ul style="margin-top: 10px; padding-left: 20px;"> <li>Hilft, eigene Trigger zu erkennen</li>
+                        <li>Kannst du bei Bedarf proaktiv kommunizieren: "Ich hatte einen schwierigen Morgen - falls ich kurz angebunden wirke, liegt's nicht an dir"</li>
+                    </ul>
+                </div>
+
+                <div class="habit-card">
+                    <h3>2️⃣ Präzise Gefühle benennen</h3>
+                    <p>Statt "Ich bin gestresst" → "Ich fühle mich überfordert/unsicher/frustriert"</p>
+                    <ul style="margin-top: 10px; padding-left: 20px;"> <li>Je präziser, desto weniger überwältigend fühlt es sich an</li>
+                        <li>Hilft auch in Gesprächen: "Ich bin frustriert über die Verzögerung" (klar) vs. "Ich bin sauer" (unklar)</li>
+                    </ul>
+                </div>
+
+                <div class="habit-card">
+                    <h3>3️⃣ Abend-Ritual: Emotionale Reflexion</h3>
+                    <p>Kurz notieren: Situation → Gefühl → Mein Bedürfnis dahinter</p>
+                    <div class="example-box" style="margin-top: 10px; background: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.5);">
+                        <strong style="color: #194a6b;">Beispiel:</strong> "Kollege hat nicht zugehört → frustriert → Bedürfnis nach Wertschätzung" </div>
+                    <p style="margin-top: 10px;">Nach 2 Wochen erkennst du Muster und kannst präventiv handeln</p>
+                </div>
+            </div>
+
+            <div class="chapter" data-chapter="6">
+                <h2><span class="icon">✨</span> Zusammenfassung & Notfall-Strategie</h2>
+                
+                <div class="emergency-box">
+                    <h3>🆘 Notfall-Satz bei Überforderung</h3>
+                    <p class="emergency-quote">"Ich brauche 10 Minuten, um das zu verarbeiten/darüber nachzudenken."</p>
+                    <ul style="text-align: left; margin-top: 15px; color: #721c24; padding-left: 20px;"> <li>Ist professionell und ehrlich</li>
+                        <li>Niemand kann dir das übel nehmen</li>
+                        <li>Verhindert Reaktionen, die du bereust</li>
+                    </ul>
+                </div>
+
+                <h3 style="color: #194a6b; margin: 30px 0 20px 0;">Die wichtigsten Prinzipien:</h3> <div class="step-card">
+                    <div class="step-title">🎯 Emotionen als Information verstehen</div>
+                    <div class="step-content" style="margin-left: 0;"> Sie zeigen dir, was dir wichtig ist (Werte), wo Grenzen überschritten werden und was du brauchst.
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">⏸️ Die Pause nutzen</div>
+                    <div class="step-content" style="margin-left: 0;"> 90 Sekunden bis 10 Minuten können den Unterschied zwischen Eskalation und konstruktiver Lösung machen.
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">🎭 Person von Inhalt trennen</div>
+                    <div class="step-content" style="margin-left: 0;"> Konzentriere dich auf die Sachebene, nicht auf die emotionale Färbung der Botschaft.
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-title">💬 Präzise kommunizieren</div>
+                    <div class="step-content" style="margin-left: 0;"> Je genauer du deine Gefühle benennst, desto besser kannst du damit umgehen und sie kommunizieren.
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>🌟 Erinnerung:</strong><br>
+                    Die Kunst ist nicht, Emotionen zu unterdrücken, sondern <span class="highlight">bewusst zu entscheiden</span>, wie du auf sie reagierst. Mit Übung wird dies zur zweiten Natur.
+                </div>
+
+                <div style="text-align: center; margin-top: 40px; padding: 30px; background: #194a6b; color: white; border-radius: 10px;"> <h3 style="margin-bottom: 15px;">Viel Erfolg bei der Umsetzung! 🚀</h3>
+                    <p>Kleine Schritte führen zu großen Veränderungen.</p>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="nav-btn" id="prevBtn" onclick="previousChapter()">← Zurück</button>
+                <button class="nav-btn" id="nextBtn" onclick="nextChapter()">Weiter →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentChapter = 0;
+        const totalChapters = 7;
+
+        function showChapter(index) {
+            const chapters = document.querySelectorAll('.chapter');
+            const navButtons = document.querySelectorAll('nav button');
+            
+            chapters.forEach(ch => ch.classList.remove('active'));
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            
+            chapters[index].classList.add('active');
+            navButtons[index].classList.add('active');
+            
+            currentChapter = index;
+            updateNavigation();
+            updateProgressBar();
+            
+            // Scrollt das Inhaltsfenster nach oben, nicht die ganze Seite
+            document.querySelector('.content').scrollTo({ top: 0, behavior: 'smooth' });
+            // Falls der Container selbst nicht scrollbar ist, scrollt die Seite:
+            window.scrollTo({ top: document.querySelector('.container').offsetTop, behavior: 'smooth' });
+        }
+
+        function nextChapter() {
+            if (currentChapter < totalChapters - 1) {
+                showChapter(currentChapter + 1);
+            }
+        }
+
+        function previousChapter() {
+            if (currentChapter > 0) {
+                showChapter(currentChapter - 1);
+            }
+        }
+
+        function updateNavigation() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentChapter === 0;
+            nextBtn.disabled = currentChapter === totalChapters - 1;
+            
+            if (currentChapter === totalChapters - 1) {
+                nextBtn.textContent = '✓ Abgeschlossen';
+            } else {
+                nextBtn.textContent = 'Weiter →';
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentChapter + 1) / totalChapters) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                previousChapter();
+            } else if (e.key === 'ArrowRight') {
+                nextChapter();
+            }
+        });
+
+        // Initialize
+        showChapter(0); // Stellt sicher, dass der erste Tab beim Laden aktiv ist
+    </script>
+</body>
+</html>
+```
